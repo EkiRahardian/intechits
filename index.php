@@ -44,6 +44,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="social-contact">
+								<a><?php echo "Today is " . date("Y/m/d") . "<br>";?></a>
                                 <a href="https://www.its.ac.id/" target="_blank"><i class="fa fa-external-link"></i>https://www.its.ac.id/</a>
                                 <a href="mailto:teknologi.informasi@its.ac.id"><i class="fa fa-envelope"></i>teknologi.informasi@its.ac.id</a>
                             </div>
@@ -63,10 +64,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand"><img src="assets/images/logo.png" alt="Logo" /></a>
+                    <a class="navbar"><img src="assets/images/logo.png" alt="Logo" /></a>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="index.php#tentang">Tentang</a></li>
+                        <li><a href="index.php#mengapa">Mengapa Teknologi Informasi?</a></li>
+                        <li><a href="index.php#fasilitas">Fasilitas</a></li>
+                        <li><a href="index.php#peluang">Jenis Peluang Kerja</a></li>
+                        <li><a href="index.php#lulusan">Profil Lulusan</a></li>
+                        <li><a href="index.php#jalur">Jalur Masuk</a></li>
+						<li><a href="index.php#kata">Apa Kata Mereka?</a></li>
+						<!--<li class="login"><a href="#">Siapa kamu</a></li> -->
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
 
@@ -103,7 +117,7 @@
                         </div>
 
                         <div class="col-sm-6 margin-top-60">
-                            <div class="single_features_right ">
+                            <div id="tentang" class="single_features_right ">
                                 <h2>TENTANG</h2>
 								<h4>Visi</h4>
 								<p>Menjadi Program Studi Teknologi Informasi yang unggul dalam bidang keamanan siber dan Teknologi berbasis Internet (<i>Internet of Things</i>) untuk mendukung pembangunan <i>Smart City</i> secara berkelanjutan hingga tahun 2023.</p>
@@ -125,7 +139,7 @@
                 <div class="row">
                     <div class="main_features_content2">
                         <div class="col-sm-6 margin-top-60">
-                            <div class="single_features_right ">
+                            <div id="mengapa" class="single_features_right ">
                                 <h2>MENGAPA TEKNOLOGI INFORMASI?</h2>
                                 <ul>
                                     <li>1. Saat ini banyak terdapat <i>hacker</i> di dunia siber, oleh karena itu diperlukan ahli keamanan siber dan aplikasi untuk mengurangi penipuan (<i>fraud</i>).</li>
@@ -157,7 +171,7 @@
                         </div>
 
                         <div class="col-sm-6 margin-top-60">
-                            <div class="single_features_right ">
+                            <div id="fasilitas" class="single_features_right ">
                                 <h2>FASILITAS</h2>
 								<h4>• Laboratorium</h4>
                                 <p>Terdapat 2 Laboratorium Komputer (Lab Keamanan Siber dan Lab Teknologi <i>Smart City</i>). Seluruh Komputer telah dilengkapi oleh perangkat lunak yang dapat digunakan untuk mendukung kegiatan praktikum maupun kegiatan akademis lainnya.</p>
@@ -177,7 +191,7 @@
                 <div class="row">
                     <div class="main_features_content2">
 						<div class="col-sm-6 margin-top-60">
-                            <div class="single_features_right ">
+                            <div id="peluang" class="single_features_right ">
                                 <h2>JENIS PELUANG KERJA</h2>
                                 <ul>
                                     <li>• Komputasi Awan dan Komputasi Terdistribusi (<i>Cloud and Distributed Computing</i>).</li>
@@ -205,7 +219,7 @@
             <div class="container">
                 <div class="row">
                     <div class="main_service2">
-                        <div class="head_title text-center">
+                        <div id="lulusan" class="head_title text-center">
                             <h2>PROFIL LULUSAN</h2>
                             <p>Profil lulusan adalah basis perumusan kurikulum sebuah program studi, target sekaligus tolok-ukur berhasil/tidaknya sebuah kurikulum program studi untuk menghasilkan lulusan-lulusan dengan kompetensi yang diinginkan.</p>
                         </div>
@@ -278,7 +292,7 @@
         <section id="price" class="price sections">
 
 
-            <div class="head_title text-center">
+            <div id="jalur" class="head_title text-center">
                 <h1>Jalur Masuk</h1>
 				<p>Pada Tahun Akademik 2018/2019, penerimaan mahasiswa baru ITS program Sarjana mengacu pada Peraturan Menteri Riset, Teknologi, dan Pendidikan Tinggi (Permenristekdikti) Nomor Nomor 2 Tahun 2015, tentang Penerimaan Mahasiswa Baru Program Sarjana pada Perguruan Tinggi Negeri, sebagaimana diubah dengan Peraturan Menteri Riset, Teknologi, dan Pendidikan Tinggi Republik Indonesia Nomor 45 Tahun 2015.</p>
 				<p>Berdasarkan Peraturan Menteri tersebut ditetapkan bahwa pola penerimaan mahasiswa baru Program Sarjana ITS dilakukan melalui tiga pola, yaitu:</p>			
@@ -333,7 +347,7 @@
         <!-- Sections -->
         <section id="business" class="portfolio sections">
             <div class="container">
-                <div class="head_title text-center">
+                <div id="kata" class="head_title text-center">
                     <h1>Apa Kata Mereka?</h1>
                 </div>
 
@@ -398,7 +412,6 @@
         <!--Footer-->
         <footer id="footer" class="footer">
             <div class="container">
-
                     </div>
                 </div>
             </div>
