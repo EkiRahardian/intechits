@@ -28,6 +28,39 @@
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
+	<?php 
+	function hariIni()
+	{
+		$hari = date ("D");
+		switch($hari){
+			case 'Sun':
+				$hari_ini = "Minggu";
+			break;
+			case 'Mon':			
+				$hari_ini = "Senin";
+			break;
+			case 'Tue':
+				$hari_ini = "Selasa";
+			break;
+			case 'Wed':
+				$hari_ini = "Rabu";
+			break;
+			case 'Thu':
+				$hari_ini = "Kamis";
+			break;
+			case 'Fri':
+				$hari_ini = "Jum'at";
+			break;
+			case 'Sat':
+				$hari_ini = "Sabtu";
+			break;
+			default:
+				$hari_ini = "Tidak tahu";		
+			break;
+		}
+		return $hari_ini;
+	}
+	?>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -44,7 +77,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="social-contact">
-								<a><?php echo "Today is " . date("Y/m/d") . "<br>";?></a>
+								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y") . "<br>";?></a>
                                 <a href="https://www.its.ac.id/" target="_blank"><i class="fa fa-external-link"></i>https://www.its.ac.id/</a>
                                 <a href="mailto:teknologi.informasi@its.ac.id"><i class="fa fa-envelope"></i>teknologi.informasi@its.ac.id</a>
                             </div>
