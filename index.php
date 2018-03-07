@@ -348,7 +348,7 @@
             <div class="cd-pricing-container cd-has-margins">
                 <ul class="cd-pricing-list cd-bounce-invert">
                     <li class="cd-popular">
-						<a href="https://smits.its.ac.id/sarjana/#snmptn" target="_blank">
+						<a onclick="window.open('https://smits.its.ac.id/sarjana/#snmptn')" onmouseover="" style="cursor: pointer;" target="_blank">
                         <ul class="cd-pricing-wrapper">
                             <li data-type="monthly" class="is-visible">
                                 <header class="cd-pricing-header">
@@ -361,7 +361,7 @@
 						</a>
                     </li>
                     <li class="cd-popular">
-						<a href="https://smits.its.ac.id/sarjana/#sbmptn" target="_blank">
+						<a onclick="window.open('https://smits.its.ac.id/sarjana/#sbmptn')" onmouseover="" style="cursor: pointer;" target="_blank">
                         <ul class="cd-pricing-wrapper">
                             <li data-type="monthly" class="is-visible">
                                 <header class="cd-pricing-header">
@@ -374,7 +374,7 @@
 						</a>
                     </li>
                     <li class="cd-popular">
-						<a href="https://smits.its.ac.id/sarjana/#pkm" target="_blank">
+						<a onclick="window.open('https://smits.its.ac.id/sarjana/#pkm')" onmouseover="" style="cursor: pointer;" target="_blank">
                         <ul class="cd-pricing-wrapper">
                             <li data-type="monthly" class="is-visible">
                                 <header class="cd-pricing-header">
