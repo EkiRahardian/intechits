@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
 
-
         <!--For Plugins external css-->
         <link rel="stylesheet" href="assets/css/plugins.css" />
         <link rel="stylesheet" href="assets/css/roboto-webfont.css" />
@@ -25,10 +24,23 @@
 
         <!--Theme Responsive css-->
         <link rel="stylesheet" href="assets/css/responsive.css" />
-
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			<?php date_default_timezone_set('Asia/Jakarta'); ?>
+			var serverTime = new Date(<?php print date('Y, m, d, H, i, s, 0'); ?>);
+			var clientTime = new Date();
+			var Diff = serverTime.getTime() - clientTime.getTime();
+			function displayServerTime(){
+				var clientTime = new Date();
+				var time = new Date(clientTime.getTime() + Diff);
+				var sh = time.getHours().toString();
+				var sm = time.getMinutes().toString();
+				var ss = time.getSeconds().toString();
+				document.getElementById("clock").innerHTML = (sh.length==1?"0"+sh:sh) + ":" + (sm.length==1?"0"+sm:sm) + ":" + (ss.length==1?"0"+ss:ss);
+			}
+		</script>
     </head>
-    <body>
+    <body onload="setInterval('displayServerTime()', 1000);">
 	<?php 
 	function hariIni()
 	{
@@ -76,9 +88,10 @@
                             <div class="social-icon">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-12">
                             <div class="social-contact">
-								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y") . " jam " . date("H:i:s")  .  "<br>";?></a>
+								<a id ="clock"><?php print date('H:i:s');?></a>
+								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y");?></a>
                                 <a href="https://www.its.ac.id/" target="_blank"><i class="fa fa-external-link"></i>https://www.its.ac.id/</a>
                                 <a href="mailto:teknologi.informasi@its.ac.id"><i class="fa fa-envelope"></i>teknologi.informasi@its.ac.id</a>
                             </div>
@@ -446,24 +459,26 @@
         <!--Footer-->
         <footer id="footer" class="footer">
             <div class="container">
+                <div class="row">
+                    <div class="footer-wrapper">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Institut Teknologi Sepuluh Nopember</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </footer>
 		
-		
 		<div class="scrollup">
 			<a href="#"><i class="fa fa-chevron-up"></i></a>
 		</div>
 
-
         <script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="assets/js/vendor/bootstrap.min.js"></script>
-
         <script src="assets/js/plugins.js"></script>
         <script src="assets/js/modernizr.js"></script>
         <script src="assets/js/main.js"></script>
     </body>
 </html>
-try
-new content
