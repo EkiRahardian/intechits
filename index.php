@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="social-contact">
-								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y") . "<br>";?></a>
+								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y") . " jam " . date("H:i:s")  .  "." ;?></a>
                                 <a href="https://www.its.ac.id/" target="_blank"><i class="fa fa-external-link"></i>https://www.its.ac.id/</a>
                                 <a href="mailto:teknologi.informasi@its.ac.id"><i class="fa fa-envelope"></i>teknologi.informasi@its.ac.id</a>
                             </div>
