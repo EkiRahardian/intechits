@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
+        <!--<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
 
         <!--For Plugins external css-->
         <link rel="stylesheet" href="assets/css/plugins.css" />
@@ -41,6 +41,12 @@
 		</script>
     </head>
     <body onload="setInterval('displayServerTime()', 1000);">
+	<?php
+		if(!isset($_SESSION['login']))
+		{ //if login in session is not set
+			header("Location: http://intechits.hostingmerahputih.id/login.php");
+		}
+	?>
 	<?php 
 	function hariIni()
 	{
