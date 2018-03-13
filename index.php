@@ -1,23 +1,27 @@
 <?php
-include('control.php');
-	$error = "";
+	$servername = "localhost";
+	$username = "ekirahardian";
+	$password = "ekiverycool2X";
+	$dbname = "ekirahar_useraccount";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
+      // username and password sent from form
       $myusername = mysqli_real_escape_string($conn,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 
-      
+      $mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 	
       $sql = "SELECT id FROM User WHERE username = '$myusername' and password = '$mypassword'";
       $result = mysqli_query($conn,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['active'];
-      
       $count = mysqli_num_rows($result);
       // If result matched $myusername and $mypassword, table row must be 1 row
-		
       if($count == 1) {
-		 session_register("myusername");
+		  header("location: main.php");
          $_SESSION['login_user'] = $myusername;
-		 header("location: main.php");
       }else {	
          $error = "Your Login Name or Password is invalid";
       }
@@ -68,10 +72,9 @@ include('control.php');
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
-					
-					<div class="text-right p-t-13 p-b-23">
+					<div class="container-login100-form-btn">
+					<br>
 					</div>
-					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Log in <br>
