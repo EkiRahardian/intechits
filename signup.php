@@ -30,7 +30,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="post">
 					<span class="login100-form-title">
 						Sign Up
 					</span>
@@ -49,9 +49,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Sign up
-						</button>
+							<input class="login100-form-btn" type="submit" value="Sign Up" name="Submit">
 					</div>
 
 					<div class="flex-col-c p-t-170 p-b-40">
@@ -59,7 +57,7 @@
 							Already have an account?
 						</span>
 
-						<a href="login.php" class="txt3">
+						<a href="index.php" class="txt3">
 							Log in now
 						</a>
 					</div>
@@ -70,18 +68,7 @@
 <?php
 function submit()
 {
-	$servername = "localhost";
-	$username = "ekirahardian";
-	$password = "ekiverycool2X";
-	$dbname = "ekirahar_useraccount";	
-
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 
-
+	include('control.php');
 	$sql = "INSERT INTO User (username, password)
 	VALUES ('" . $_POST['username'] . "', '" . $_POST['pass'] . "')";
 
