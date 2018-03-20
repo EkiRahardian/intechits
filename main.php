@@ -114,6 +114,7 @@
 								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y");?></a>
                                 <a href="https://www.its.ac.id/" target="_blank"><i class="fa fa-external-link"></i>https://www.its.ac.id/</a>
                                 <a href="mailto:teknologi.informasi@its.ac.id"><i class="fa fa-envelope"></i>teknologi.informasi@its.ac.id</a>
+								<a href="logout.php">Log Out</a>
                             </div>
                         </div>
                     </div>
