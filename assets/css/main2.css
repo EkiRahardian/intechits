@@ -55,7 +55,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #1b3815;
+  color: #151638;
 }
 
 /*---------------------------------------------*/
@@ -104,15 +104,15 @@ textarea:focus, input:focus {
 }
 
 
-input::-webkit-input-placeholder { color: #1b3815;}
-input:-moz-placeholder { color: #1b3815;}
-input::-moz-placeholder { color: #1b3815;}
-input:-ms-input-placeholder { color: #1b3815;}
+input::-webkit-input-placeholder { color: #151638;}
+input:-moz-placeholder { color: #151638;}
+input::-moz-placeholder { color: #151638;}
+input:-ms-input-placeholder { color: #151638;}
 
-textarea::-webkit-input-placeholder { color: #1b3815;}
-textarea:-moz-placeholder { color: #1b3815;}
-textarea::-moz-placeholder { color: #1b3815;}
-textarea:-ms-input-placeholder { color: #1b3815;}
+textarea::-webkit-input-placeholder { color: #151638;}
+textarea:-moz-placeholder { color: #151638;}
+textarea::-moz-placeholder { color: #151638;}
+textarea:-ms-input-placeholder { color: #151638;}
 
 /*---------------------------------------------*/
 button {
@@ -141,14 +141,14 @@ iframe {
 .txt2 {
   font-family: Ubuntu-Regular;
   font-size: 15px;
-  color: #57b846;
+  color: #0000CD;
   line-height: 1.4;
 }
 
 .txt3 {
   font-family: Ubuntu-Bold;
   font-size: 15px;
-  color: #57b846;
+  color: #0000CD;
   line-height: 1.4;
   text-transform: uppercase;
 }
@@ -211,7 +211,7 @@ iframe {
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #57b846;
+  background-color: #0000CD;
   padding-top: 50px;
   padding-bottom: 39px;
 }
@@ -229,7 +229,7 @@ iframe {
 .input100 {
   font-family: Ubuntu-Bold;
   font-size: 15px;
-  color: #1b3815;
+  color: #151638;
   line-height: 1.2;
 
   position: relative;
@@ -296,7 +296,7 @@ iframe {
   padding: 0 20px;
   width: 100%;
   height: 50px;
-  background-color: #57b846;
+  background-color: #0000CD;
   border-radius: 25px;
 
   font-family: Ubuntu-Bold;
@@ -312,7 +312,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #1b3815;
+  background-color: #151638;
 }
 
 /*------------------------------------------------------------------
