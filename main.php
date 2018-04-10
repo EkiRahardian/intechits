@@ -1,22 +1,15 @@
-<?php
-	$servername = "localhost";
-	$username = "ekirahar_admin";
-	$password = "kurangajar1803";
-	$dbname = "ekirahar_useraccount";	
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-   session_start();
-   $user_check = $_SESSION['login_user'];
-   $ses_sql = mysqli_query($conn,"select username from User where username = '$user_check'");
-   $row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
-   $login_session = $row['username'];
-   if(!isset($_SESSION['login_user'])){
-      header("location: index.php");
-   }	
+<?php session_start();
+	$host  = $_SERVER['HTTP_HOST'];
+	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$redirect = 'index.php';
+	include("config.php");
+	$user_check = $_SESSION['login_user'];
+	$ses_sql = mysqli_query($conn,"select username from User where username = '$user_check'");
+	$row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
+	$login_session = $row['username'];
+	if(!isset($_SESSION['login_user'])){
+		header("Location: http://$host$url/$redirect");
+	}	
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->

@@ -26,7 +26,29 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+<?php
+function submit()
+{
+	$host  = $_SERVER['HTTP_HOST'];
+	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$redirect = 'index.php';
+	include("config.php");
+	$sql = "INSERT INTO User (username, password) VALUES ('" . $_POST['username'] . "', '" . $_POST['pass'] . "')";
+	if ($conn->query($sql) === TRUE)
+	{
+		header("Location: http://$host$url/$redirect");
+	}
+	else
+	{
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+	$conn->close();
+}
+if(isset($_POST['Submit']))
+{
+   submit();
+} 
+?>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -44,14 +66,12 @@
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
-
-					<div class="text-right p-t-13 p-b-23">
+					<div class="container-login100-form-btn">
+					<br>
 					</div>
-
 					<div class="container-login100-form-btn">
 							<input class="login100-form-btn" type="submit" value="Sign Up" name="Submit">
 					</div>
-
 					<div class="flex-col-c p-t-170 p-b-40">
 						<span class="txt1 p-b-9">
 							Already have an account?
@@ -65,37 +85,7 @@
 			</div>
 		</div>
 	</div>
-<?php
-function submit()
-{
-	$servername = "localhost";
-	$username = "ekirahar_admin";
-	$password = "kurangajar1803";
-	$dbname = "ekirahar_useraccount";
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-	$sql = "INSERT INTO User (username, password)
-	VALUES ('" . $_POST['username'] . "', '" . $_POST['pass'] . "')";
 
-	var_dump($sql);
-
-	if ($conn->query($sql) === TRUE) {
-		echo "New record created successfully";
-	} else {
-		echo "Error: " . $sql . "<br>" . $conn->error;
-	}
-
-	$conn->close();
-}
-if(isset($_POST['Submit']))
-{
-   submit();
-} 
-?>
 	
 <!--===============================================================================================-->
 	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>

@@ -1,3 +1,36 @@
+<?php session_start();
+	$host  = $_SERVER['HTTP_HOST'];
+	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$redirect = 'main.php';
+	$error = "";
+	include("config.php");
+	if(isset($_SESSION['login_user']))
+	{
+		header("Location: http://$host$url/$redirect");
+	}
+	if($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+		// username and password sent from form
+		$myusername = mysqli_real_escape_string($conn,$_POST['username']);
+		$mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 	
+		$sql = "SELECT id FROM User WHERE username = '$myusername' and password = '$mypassword'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$active = $row['active'];
+		$count = mysqli_num_rows($result);
+		// If result matched $myusername and $mypassword, table row must be 1 row
+		if($count == 1)
+		{
+			$_SESSION['login_user'] = $myusername;
+			header("Location: http://$host$url/$redirect");
+		}
+		else
+		{		
+			$error = "Your Login Name or Password is invalid";
+		}
+   }
+?>
+<!doctype html>
 <html lang="en">
 <head>
 	<title>Log In</title>
@@ -47,41 +80,8 @@
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Log in <br>
+							Log in <br> <?php echo $error;?>
 						</button>
-						<?php
-							$servername = "localhost";
-							$username = "ekirahar_admin";
-							$password = "kurangajar1803";
-							$dbname = "ekirahar_useraccount";
-							// Create connection
-							$conn = new mysqli($servername, $username, $password, $dbname);
-							// Check connection
-							if ($conn->connect_error) {
-								die("Connection failed: " . $conn->connect_error);
-							}
-							session_start();
-							if($_SERVER["REQUEST_METHOD"] == "POST") {
-								// username and password sent from form
-								$myusername = mysqli_real_escape_string($conn,$_POST['username']);
-								$mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 	
-								$sql = "SELECT id FROM User WHERE username = '$myusername' and password = '$mypassword'";
-								$result = mysqli_query($conn,$sql);
-								$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-								$active = $row['active'];
-								$count = mysqli_num_rows($result);
-								// If result matched $myusername and $mypassword, table row must be 1 row
-								if($count == 1)
-								{
-									header("location: main.php");
-									$_SESSION['login_user'] = $myusername;
-								}
-								else
-								{		
-									echo "Your Login Name or Password is invalid";
-								}
-						   }
-						?>
 					</div>
 					<div class="flex-col-c p-t-170 p-b-40">
 						<span class="txt1 p-b-9">
