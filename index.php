@@ -138,6 +138,7 @@
                         <li><a href="index.php#lulusan">Profil Lulusan</a></li>
                         <li><a href="index.php#jalur">Jalur Masuk</a></li>
 						<li><a href="index.php#kata">Apa Kata Mereka?</a></li>
+						<li><a href="index.php#cuaca">Temperatur Surabaya</a></li>
 						<!--<li class="login"><a href="#">Siapa kamu</a></li> -->
                     </ul>
 
@@ -402,9 +403,8 @@
                     </li>
                 </ul> <!-- .cd-pricing-list -->
             </div> <!-- .cd-pricing-container -->	
-
         </section>
-
+		
         <!-- Sections -->
         <section id="business" class="portfolio sections">
             <div class="container">
@@ -469,7 +469,72 @@
             </div> <!-- /container -->       
         </section>
 
-
+		<!-- Sections -->
+		<section>
+			<script src="assets/js/highcharts.js"></script>
+			<div id="cuaca" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			<script type="text/javascript">
+				Highcharts.chart('cuaca', {
+					chart: {
+						type: 'spline'
+					},
+					title: {
+						text: 'Rata-Rata Temperatur di Surabaya 2013'
+					},
+					subtitle: {
+						text: 'Source: https://surabayakota.bps.go.id/statictable/2015/02/10/17/rata-rata-kelembaban-tekanan-udara-temperatur-dan-penyinaran-matahari-di-perak-i-surabaya-per-bulan.html'
+					},
+					xAxis: {
+						categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+							'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+					},
+					yAxis: {
+						title: {
+							text: 'Temperatur'
+						},
+						labels: {
+							formatter: function () {
+								return this.value + '°';
+							}
+						}
+					},
+					tooltip: {
+						crosshairs: true,
+						shared: true
+					},
+					plotOptions: {
+						spline: {
+							marker: {
+								radius: 4,
+								lineColor: '#666666',
+								lineWidth: 1
+							}
+						}
+					},
+					series:
+					[
+						{
+							name: 'Surabaya',
+							marker: {
+								symbol: 'square'
+							},
+							data: [27.7, 28.3, 28.4, 28.8, 28.8, 28.4, 27.8, 28.2, 28.2, 30.2, 29.2, 27.2]
+						}
+					]
+				});
+			</script>
+			<script>
+				if (window.parent && window.parent.parent)
+				{
+					window.parent.parent.postMessage(["resultsFrame",
+					{
+						height: document.body.getBoundingClientRect().height,
+						slug: "89w03xLt"
+					}], "*")
+				}
+			</script>
+		</section>
+		
         <!--Footer-->
         <footer id="footer" class="footer">
             <div class="container">

@@ -3,6 +3,9 @@
 <head>
 	<title>Sign Up</title>
 	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="googlebot" content="noindex, nofollow">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="assets/images/icon.png"/>
@@ -33,12 +36,13 @@
 		global $error;
 		$host  = $_SERVER['HTTP_HOST'];
 		$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		$redirect = 'login.php';
+		//$redirect = 'login.php';
 		include("config.php");
 		$sql = "INSERT INTO User (username, password) VALUES ('" . $_POST['username'] . "', '" . $_POST['pass'] . "')";
 		if ($conn->query($sql) === TRUE)
 		{
-			header("Location: http://$host$url/$redirect");
+			//header("Location: http://$host$url/$redirect");
+			$error = "Your account has been created successfully";
 		}
 		else
 		{
@@ -72,8 +76,18 @@
 					<br>
 					</div>
 					<div class="container-login100-form-btn">
-							<input class="login100-form-btn" type="submit" value="Sign Up" name="Submit">
+						<input class="login100-form-btn" type="submit" value="Sign Up" name="Submit">
+						<a class="txt3">
 							<br> <?php echo $error;?>
+						</a>
+					</div>
+					<div class="container-login100-form-btn">
+					<br>
+					</div>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" onclick="location.href='downloadxls.php'" type="button">
+							Download Daftar Mahasiswa SI 2016 (Excel)
+						</button>
 					</div>
 					<div class="flex-col-c p-t-170 p-b-40">
 						<span class="txt1 p-b-9">
@@ -106,6 +120,6 @@
 	<script src="assets/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="assets/js/main2.js"></script>
-
+<!--===============================================================================================-->
 </body>
 </html>
