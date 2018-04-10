@@ -1,39 +1,7 @@
-<?php session_start();
-	$host  = $_SERVER['HTTP_HOST'];
-	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-	$redirect = 'main.php';
-	$error = "";
-	include("config.php");
-	if(isset($_SESSION['login_user']))
-	{
-		header("Location: http://$host$url/$redirect");
-	}
-	if($_SERVER["REQUEST_METHOD"] == "POST")
-	{
-		// username and password sent from form
-		$myusername = mysqli_real_escape_string($conn,$_POST['username']);
-		$mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 	
-		$sql = "SELECT id FROM User WHERE username = '$myusername' and password = '$mypassword'";
-		$result = mysqli_query($conn,$sql);
-		$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-		$active = $row['active'];
-		$count = mysqli_num_rows($result);
-		// If result matched $myusername and $mypassword, table row must be 1 row
-		if($count == 1)
-		{
-			$_SESSION['login_user'] = $myusername;
-			header("Location: http://$host$url/$redirect");
-		}
-		else
-		{		
-			$error = "Your Login Name or Password is invalid";
-		}
-   }
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Log In</title>
+	<title>Sign Up</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -58,12 +26,35 @@
 <!--===============================================================================================-->
 </head>
 <body>
+<?php
+function submit()
+{
+	$host  = $_SERVER['HTTP_HOST'];
+	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$redirect = 'index.php';
+	include("config.php");
+	$sql = "INSERT INTO User (username, password) VALUES ('" . $_POST['username'] . "', '" . $_POST['pass'] . "')";
+	if ($conn->query($sql) === TRUE)
+	{
+		header("Location: http://$host$url/$redirect");
+	}
+	else
+	{
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+	$conn->close();
+}
+if(isset($_POST['Submit']))
+{
+   submit();
+} 
+?>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="post">
 					<span class="login100-form-title">
-						Log In
+						Sign Up
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
@@ -79,24 +70,22 @@
 					<br>
 					</div>
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Log in <br> <?php echo $error;?>
-						</button>
+							<input class="login100-form-btn" type="submit" value="Sign Up" name="Submit">
 					</div>
 					<div class="flex-col-c p-t-170 p-b-40">
 						<span class="txt1 p-b-9">
-							Don’t have an account?
+							Already have an account?
 						</span>
 
-						<a href="signup.php" class="txt3">
-							Sign up now
+						<a href="index.php" class="txt3">
+							Log in now
 						</a>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
+
 	
 <!--===============================================================================================-->
 	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -104,7 +93,7 @@
 	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="assets/vendor/bootstrap/js/popper.js"></script>
-	<script src="a	ssets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="assets/vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
