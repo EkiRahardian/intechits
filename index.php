@@ -1,6 +1,6 @@
 <?php session_start();
 	$host  = $_SERVER['HTTP_HOST'];
-	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$url   = rtrim(dirname(htmlspecialchars($_SERVER["PHP_SELF"])), '/\\');
 	$redirect = 'login.php';
 	include("config.php");
 	$user_check = $_SESSION['login_user'];

@@ -1,12 +1,44 @@
 <?php session_start();
 	$host  = $_SERVER['HTTP_HOST'];
-	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$url   = rtrim(dirname(htmlspecialchars($_SERVER["PHP_SELF"])), '/\\');
 	$redirect = 'index.php';
 	$message = "";
 	include("config.php");
 	if(isset($_SESSION['login_user']))
 	{
 		header("Location: https://$host$url/$redirect");
+	}
+	function cleanInput($input)
+	{
+		$search = array
+		(
+		'@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+		'@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+		'@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+		'@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+		);
+		$output = preg_replace($search, '', $input);
+		return $output;
+	}
+	function sanitize($input)
+	{
+		if (is_array($input))
+		{
+			foreach($input as $var=>$val)
+			{
+				$output[$var] = sanitize($val);
+			}
+		}
+		else
+		{
+			if (get_magic_quotes_gpc())
+			{
+				$input = stripslashes($input);
+			}
+			$input  = cleanInput($input);
+			$output = $input;
+		}
+		return $output;
 	}
 	function encrypt($string)
 	{
@@ -23,8 +55,8 @@
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$encryptPassword = encrypt($_POST['pass']);
-		$myusername = mysqli_real_escape_string($conn,$_POST['username']);
-		$mypassword = mysqli_real_escape_string($conn,$encryptPassword); 	
+		$myusername = mysqli_real_escape_string($conn,sanitize($_POST['username']));
+		$mypassword = mysqli_real_escape_string($conn,sanitize($encryptPassword)); 
 		$sql = "SELECT username FROM User WHERE username = '$myusername' and password = '$mypassword'";
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
