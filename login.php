@@ -2,31 +2,42 @@
 	$host  = $_SERVER['HTTP_HOST'];
 	$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	$redirect = 'index.php';
-	$error = "";
+	$message = "";
 	include("config.php");
 	if(isset($_SESSION['login_user']))
 	{
-		header("Location: http://$host$url/$redirect");
+		header("Location: https://$host$url/$redirect");
+	}
+	function encrypt($string)
+	{
+		$output = false;
+		$encrypt_method = "AES-256-CBC";
+		$secret_key = 'w89sdfbsdinf9nq23nf9nf9wnfw9en';
+		$secret_iv = 'c0shsd9fhShfa9fna9enadaWf';
+		$key = hash('sha256', $secret_key);
+		$iv = substr(hash('sha256', $secret_iv), 0, 16);
+		$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+		$output = base64_encode($output);
+		return $output;
 	}
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-		// username and password sent from form
+		$encryptPassword = encrypt($_POST['pass']);
 		$myusername = mysqli_real_escape_string($conn,$_POST['username']);
-		$mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 	
+		$mypassword = mysqli_real_escape_string($conn,$encryptPassword); 	
 		$sql = "SELECT username FROM User WHERE username = '$myusername' and password = '$mypassword'";
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 		$active = $row['active'];
 		$count = mysqli_num_rows($result);
-		// If result matched $myusername and $mypassword, table row must be 1 row
 		if($count == 1)
 		{
 			$_SESSION['login_user'] = $myusername;
-			header("Location: http://$host$url/$redirect");
+			header("Location: https://$host$url/$redirect");
 		}
 		else
 		{		
-			$error = "Your Login Name or Password is invalid";
+			$message = "Your Login Name or Password is invalid";
 		}
    }
 ?>
@@ -84,7 +95,7 @@
 							Log in
 						</button>
 						<a class="txt3">
-							<br> <?php echo $error;?>
+							<br> <?php echo $message;?>
 						</a>
 					</div>
 					<div class="container-login100-form-btn">
@@ -116,7 +127,7 @@
 	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="assets/vendor/bootstrap/js/popper.js"></script>
-	<script src="a	ssets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="assets/vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->

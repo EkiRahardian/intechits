@@ -5,6 +5,6 @@
 	$redirect = 'login.php';
 	if(session_destroy())
 	{
-		header("Location: http://$host$url/$redirect");	
+		header("Location: https://$host$url/$redirect");	
 	}
 ?>

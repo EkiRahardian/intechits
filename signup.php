@@ -3,9 +3,6 @@
 <head>
 	<title>Sign Up</title>
 	<meta charset="UTF-8">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta name="robots" content="noindex, nofollow">
-	<meta name="googlebot" content="noindex, nofollow">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="assets/images/icon.png"/>
@@ -30,23 +27,36 @@
 </head>
 <body>
 <?php
-	$error = "";
+	$message = "";
+	function encrypt($string)
+	{
+		$output = false;
+		$encrypt_method = "AES-256-CBC";
+		$secret_key = 'w89sdfbsdinf9nq23nf9nf9wnfw9en';
+		$secret_iv = 'c0shsd9fhShfa9fna9enadaWf';
+		$key = hash('sha256', $secret_key);
+		$iv = substr(hash('sha256', $secret_iv), 0, 16);
+		$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+		$output = base64_encode($output);
+		return $output;
+	}
 	function submit()
 	{
-		global $error;
+		global $message;
+		include("config.php");
 		$host  = $_SERVER['HTTP_HOST'];
 		$url   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		//$redirect = 'login.php';
-		include("config.php");
-		$sql = "INSERT INTO User (username, password) VALUES ('" . $_POST['username'] . "', '" . $_POST['pass'] . "')";
+		$encryptPassword = encrypt($_POST['pass']);
+		$myusername = mysqli_real_escape_string($conn,$_POST['username']);
+		$mypassword = mysqli_real_escape_string($conn,$encryptPassword); 
+		$sql = "INSERT INTO User (username, password) VALUES ('" . $myusername . "', '" . $encryptPassword . "')";
 		if ($conn->query($sql) === TRUE)
 		{
-			//header("Location: http://$host$url/$redirect");
-			$error = "Your account has been created successfully";
+			$message = "Your account has been created successfully";
 		}
 		else
 		{
-			$error = "Username already exist";
+			$message = "Username already exist";
 		}
 		$conn->close();
 	}
@@ -78,7 +88,7 @@
 					<div class="container-login100-form-btn">
 						<input class="login100-form-btn" type="submit" value="Sign Up" name="Submit">
 						<a class="txt3">
-							<br> <?php echo $error;?>
+							<br> <?php echo $message;?>
 						</a>
 					</div>
 					<div class="container-login100-form-btn">

@@ -8,14 +8,14 @@
 	$row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
 	$login_session = $row['username'];
 	if(!isset($_SESSION['login_user'])){
-		header("Location: http://$host$url/$redirect");
+		header("Location: https://$host$url/$redirect");
 	}	
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="id"> <!--<![endif]-->
     <head>
 		<link rel="icon" href="assets/images/icon.png">
         <meta charset="utf-8">
@@ -88,7 +88,7 @@
 	}
 	?>
         <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 		<div class='preloader'><div class='loaded'>&nbsp;</div></div>
         <!-- Sections -->
@@ -103,6 +103,7 @@
                         </div>
                         <div class="col-xs-12">
                             <div class="social-contact">
+								<a>Selamat Datang <?php echo $login_session;?>!</a>
 								<a id ="clock"><?php print date('H:i:s');?></a>
 								<a><?php echo "Sekarang hari " . hariIni() . " tanggal " . date("d/m/Y");?></a>
                                 <a href="https://www.its.ac.id/" target="_blank"><i class="fa fa-external-link"></i>https://www.its.ac.id/</a>
