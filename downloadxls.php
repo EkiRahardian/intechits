@@ -1,5 +1,5 @@
 <?php
-	include("config.php");
+	include "config.php";
 	$filename = "DaftarMahasiswaSI2016.xls";
 	header("Content-Disposition: attachment; filename=\"$filename\"");
 	header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

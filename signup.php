@@ -1,3 +1,29 @@
+<?php
+	$message = "";
+	include "function.php" ;
+	function submit()
+	{
+		global $message;
+		include "config.php";
+		$encryptPassword = encrypt($_POST['pass']);
+		$myusername = mysqli_real_escape_string($conn,sanitize($_POST['username']));
+		$mypassword = mysqli_real_escape_string($conn,sanitize($encryptPassword)); 
+		$sql = "INSERT INTO User (username, password) VALUES ('" . $myusername . "', '" . $encryptPassword . "')";
+		if ($conn->query($sql) === TRUE)
+		{
+			$message = "Your account has been created successfully";
+		}
+		else
+		{
+			$message = "Username already exist";
+		}
+		$conn->close();
+	}
+	if(isset($_POST['Submit']))
+	{
+	   submit();
+	} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,65 +52,6 @@
 <!--===============================================================================================-->
 </head>
 <body>
-<?php
-	$message = "";
-	function sanitize($input)
-	{
-		if (is_array($input))
-		{
-			foreach($input as $var=>$val)
-			{
-				$output[$var] = sanitize($val);
-			}
-		}
-		else
-		{
-			if (get_magic_quotes_gpc())
-			{
-				$input = stripslashes($input);
-			}
-			$input  = cleanInput($input);
-			$output = $input;
-		}
-		return $output;
-	}
-	function encrypt($string)
-	{
-		$output = false;
-		$encrypt_method = "AES-256-CBC";
-		$secret_key = 'w89sdfbsdinf9nq23nf9nf9wnfw9en';
-		$secret_iv = 'c0shsd9fhShfa9fna9enadaWf';
-		$key = hash('sha256', $secret_key);
-		$iv = substr(hash('sha256', $secret_iv), 0, 16);
-		$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
-		$output = base64_encode($output);
-		return $output;
-	}
-	function submit()
-	{
-		global $message;
-		include("config.php");
-		$host  = $_SERVER['HTTP_HOST'];
-		$url   = rtrim(dirname(htmlspecialchars($_SERVER["PHP_SELF"])), '/\\');
-		$encryptPassword = encrypt($_POST['pass']);
-		$myusername = mysqli_real_escape_string($conn,sanitize($_POST['username']));
-		$mypassword = mysqli_real_escape_string($conn,sanitize($encryptPassword)); 
-		$sql = "INSERT INTO User (username, password) VALUES ('" . $myusername . "', '" . $encryptPassword . "')";
-		if ($conn->query($sql) === TRUE)
-		{
-			$message = "Your account has been created successfully";
-		}
-		else
-		{
-			$message = "Username already exist";
-		}
-		$conn->close();
-	}
-	if(isset($_POST['Submit']))
-	{
-	   submit();
-	} 
-?>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
